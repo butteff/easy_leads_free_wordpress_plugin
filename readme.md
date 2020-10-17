@@ -1,4 +1,4 @@
-# "Easy Leads Free" Wordpress plugin
+# "Easy Leads Free" WordPress plugin
 Easy Leads Free - collect leads and contacts from your website to the database. Send mails to your leads from the admin panel after.
 
 All the leads, collected from the form, will be stored inside your database. You can manage Leads and send mails to them with your own texts.
