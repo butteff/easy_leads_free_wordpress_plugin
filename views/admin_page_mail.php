@@ -1,25 +1,4 @@
 <?php
-$dir = wp_get_upload_dir();
-$home_path = get_home_path();
-function getDirContents($dir, &$results = array()) {
-    $files = scandir($dir);
-
-    foreach ($files as $key => $value) {
-        $path = realpath($dir . DIRECTORY_SEPARATOR . $value);
-        if (!is_dir($path)) {
-            $results[] = $path;
-        } else if ($value != "." && $value != "..") {
-            getDirContents($path, $results);
-            $results[] = $path;
-        }
-    }
-
-    return $results;
-}
-
-$files = getDirContents($dir['basedir']);
-
-
 global $wpdb;
 //require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
 $text = $wpdb->get_row( "SELECT * FROM `{$wpdb->base_prefix}easyleads_mailtext` WHERE id = 1" );
