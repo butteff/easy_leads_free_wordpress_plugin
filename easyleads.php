@@ -122,10 +122,10 @@ add_action('admin_post_nopriv_easy_leads_form', 'easy_leads_form');
 add_action('admin_menu', 'easyleads_plugin_setup_menu');
  
 function easyleads_plugin_setup_menu(){
-    add_menu_page( 'Easy Leads Free', 'Easy Leads Free', 'manage_options', 'easyleads_free', 'admin_page', 'dashicons-email-alt2' );
+    add_menu_page( 'Easy Leads Free', 'Easy Leads Free', 'manage_options', 'easyleads_free', 'easyleads_admin_page', 'dashicons-email-alt2' );
 }
  
-function admin_page() {
+function easyleads_admin_page() {
 
     require_once(__DIR__.'/views/style.php');
     require_once(__DIR__.'/views/admin_page.php');
