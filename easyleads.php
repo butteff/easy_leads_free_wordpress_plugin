@@ -83,15 +83,15 @@ function easy_leads_form() {
 	$mail = false;
 
 	if (isset($_POST['mail']) && filter_var($_POST['mail'], FILTER_VALIDATE_EMAIL) && (strlen($_POST['mail']) <= 255)) {
-		$mail = $_POST['mail'];
+		$mail = sanitize_email($_POST['mail']);
 	}
 
 	if (isset($_POST['name']) && (strlen($_POST['name']) <= 255)) {
-		$name = $_POST['name'];
+		$name = sanitize_text_field($_POST['name']);
 	}
 
 	if (isset($_POST['phone']) && (strlen($_POST['phone']) <= 255)) {
-		$phone = $_POST['phone'];
+		$phone = sanitize_text_field($_POST['phone']);
 	}
 
 	if ($name && $phone && $mail) {
@@ -115,6 +115,7 @@ function easy_leads_form() {
 
 add_shortcode( 'easyleadsform' , 'easyleads_shortcode_form');
 add_action('admin_post_easy_leads_form', 'easy_leads_form');
+add_action('admin_post_nopriv_easy_leads_form', 'easy_leads_form');
 
 // =========================================================================
 // Admin panel page:
@@ -125,10 +126,11 @@ function easyleads_plugin_setup_menu(){
 }
  
 function admin_page() {
-    require_once(get_home_path().'wp-content/plugins/easyleads/views/style.php');
-    require_once(get_home_path().'wp-content/plugins/easyleads/views/admin_page.php');
-    require_once(get_home_path().'wp-content/plugins/easyleads/views/admin_page_table.php');
-    require_once(get_home_path().'wp-content/plugins/easyleads/views/admin_page_mail.php');
+
+    require_once(__DIR__.'/views/style.php');
+    require_once(__DIR__.'/views/admin_page.php');
+    require_once(__DIR__.'/views/admin_page_table.php');
+    require_once(__DIR__.'/views/admin_page_mail.php');
 }
 // ==========================================================================
 
@@ -141,26 +143,22 @@ function easyleads_mail_settings() {
     		$mail = false;
 
     		if (isset($_POST['mailtext'])) {
-    			$text = $_POST["mailtext"];
+    			$text = sanitize_textarea_field($_POST["mailtext"]);
     		}
 
     		if (isset($_POST['name']) && (strlen($_POST['name']) <= 255)) {
-    			$name = $_POST["name"];
+    			$name = sanitize_text_field($_POST["name"]);
     		}
 
     		if (isset($_POST['topic']) && (strlen($_POST['topic']) <= 255)) {
-    			$topic = $_POST["topic"];
+    			$topic = sanitize_text_field($_POST["topic"]);
     		}
 
     		if (isset($_POST['mail']) && filter_var($_POST['mail'], FILTER_VALIDATE_EMAIL) && (strlen($_POST['mail']) <= 255)) {
-    			$mail = $_POST["mail"];
+    			$mail = sanitize_email($_POST["mail"]);
     		}
 
     		if ($text && $topic && $mail && $name) {
-    			$text = filter_var($text, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-    			$topic = filter_var($topic, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-    			$name = filter_var($name, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-
 	    		global $wpdb;
 	    		require_once(get_home_path() . 'wp-admin/includes/upgrade.php');
 				$wpdb->replace( "{$wpdb->base_prefix}easyleads_mailtext", [
@@ -181,10 +179,11 @@ add_action('admin_post_el_mail_form', 'easyleads_mail_settings');
 
 // Lead delete:
 function easyleads_delete() {
-	if (isset($_POST["id"])) {
+	if (isset($_POST["id"]) && is_numeric($_POST['id'])) {
+		$id = (int) $_POST["id"];
 		if( current_user_can( 'administrator' ) ){
 			global $wpdb;
-			$wpdb->delete( "{$wpdb->base_prefix}easyleads", ['id' => $_POST["id"]] );
+			$wpdb->delete( "{$wpdb->base_prefix}easyleads", ['id' => $id] );
 		}
 	}
 	wp_redirect('/wp-admin/admin.php?page=easyleads_free');
@@ -221,9 +220,10 @@ function easyleads_send_mail($id) {
 }
 
 function easyleads_send() {
-	if (isset($_POST["id"])) {
+	if (isset($_POST["id"]) && is_numeric($_POST['id'])) {
+		$id = (int) $_POST["id"];
 		if( current_user_can( 'administrator' ) ){
-			$is_sent = easyleads_send_mail($_POST["id"]);
+			$is_sent = easyleads_send_mail($id);
 			if ($is_sent) {
 				global $wpdb;
 				$wpdb->update( "{$wpdb->base_prefix}easyleads", 
@@ -231,7 +231,7 @@ function easyleads_send() {
 						'sent_at' => date('Y-m-d h:i:s'),
 						'is_sent' => 1,
 					], 
-					['id' => $_POST["id"]],
+					['id' => $id],
 					['%s']);
 			}
 		}

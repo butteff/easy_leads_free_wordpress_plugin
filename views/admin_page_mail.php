@@ -25,10 +25,10 @@ global $wpdb;
 $text = $wpdb->get_row( "SELECT * FROM `{$wpdb->base_prefix}easyleads_mailtext` WHERE id = 1" );
 
 if ($text) {
-	$mail = $text->mail;
-	$name = $text->name;
-	$topic = $text->topic;
-	$text = $text->mailtext;
+	$mail = esc_textarea($text->mail);
+	$name = esc_textarea($text->name);
+	$topic = esc_textarea($text->topic);
+	$text = esc_textarea($text->mailtext);
 } else {
 	$text = 'Input mail text here';
 	$mail = 'E-mail';
@@ -50,6 +50,6 @@ if ($text) {
 	</form>
 	<br/><hr/>
 	<h3>Need more?</h3>
-	<p>Upgrade the plugin to the premium version to have file attachments, additional form fields generation, mail notifications about new leads, and other features in future updates.</p>
+	<p>Upgrade the plugin to the premium version to have file attachments, additional form fields generation, mail notifications about new leads, xls/csv export, banlist and other features in future updates.</p>
 
 </div>
