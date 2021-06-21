@@ -1,26 +1,35 @@
 
 Table1
 {
-Column             name1
-Column             name 2
-Index             Name1
-Index             Name2
+Column              name1
+Column              name 2
+Index              Name1
+Index              Name2
 }
 
 Some test
 {
-Column  aaa
-Column  bbb
-Index  ddd
-Index hey
+Column   aaa
+Column   bbb
+Index   ddd
+Index  hey
 }
 
 Table2
 {
-Column name3
-Column name 4
+Column  name3
+Column  name 4
+Column  test
+Index  Name3
+Index  Name4
+Index  aaabbb
+}
+
+ThisTable
+{
+Column some
 Column test
-Index Name3
-Index Name4
-Index aaabbb
+Column here
+Index one
+Index two
 }
