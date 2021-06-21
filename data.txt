@@ -30,6 +30,7 @@ ThisTable
 Column some
 Column test
 Column here
+Column aaa
 Index one
 Index two
 }
