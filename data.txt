@@ -51,4 +51,5 @@ SYSAPI
   my,
   strings;
   INDEVENTS01(non-unique): +NAME;
+  index new text;
 }
