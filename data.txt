@@ -48,9 +48,7 @@ SYSAPI
   TYPE VARCHAR(128),
   FILTER CLOB(64K) nullable,
   test,
-  strings,
-  lets add more,
-  and more;
+  my,
+  strings;
   INDEVENTS01(non-unique): +NAME;
-  and one index;
 }
