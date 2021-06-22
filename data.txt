@@ -32,9 +32,3 @@ Column test
 Index one
 Index two
 }
-
-Test
-{
-Column aaa
-Index bbb
-}
