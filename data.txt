@@ -52,4 +52,5 @@ SYSAPI
   new,
   strings;
   INDEVENTS01(non-unique): +NAME;
+  And this is my index;
 }
