@@ -41,3 +41,16 @@ SYSMONITOR
   INDEVENTMONITORS01(unique): +NAME;
   INDEVENTMONITORS02(unique): -EVMONID;
 }
+
+SYSAPI
+{
+  NAME VARCHAR(128),
+  TYPE VARCHAR(128),
+  FILTER CLOB(64K) nullable,
+  test,
+  strings,
+  lets add more,
+  and more;
+  INDEVENTS01(non-unique): +NAME;
+  and one index;
+}
