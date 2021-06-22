@@ -11,6 +11,7 @@ Some test
 {
 Column    aaa
 Column    bbb
+Column test
 Index    ddd
 Index   hey
 }
