@@ -24,3 +24,11 @@ Index   Name3
 Index   Name4
 Index   aaabbb
 }
+
+ThisTable
+{
+Column some
+Column test
+Index one
+Index two
+}
