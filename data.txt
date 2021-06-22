@@ -14,6 +14,7 @@ Column    bbb
 Column test
 Index    ddd
 Index   hey
+Index sss
 }
 
 Table2
