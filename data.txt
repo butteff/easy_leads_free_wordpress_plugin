@@ -54,3 +54,13 @@ SYSAPI
   And indexes too;
   yep;
 }
+
+SomeTbl
+{
+  test,
+  it,
+  here;
+  and;
+  some indexes;
+  here;
+}
