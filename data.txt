@@ -64,4 +64,5 @@ SomeTbl
   and;
   some indexes;
   here;
+  bbb;
 }
