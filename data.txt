@@ -59,7 +59,8 @@ SomeTbl
 {
   test,
   it,
-  here;
+  here,
+  aaa;
   and;
   some indexes;
   here;
